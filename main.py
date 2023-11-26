@@ -35,6 +35,8 @@ def execute():
   args = sys.argv[1:]
   flags = fillFlags(args)
 
+  print(Fore.RESET)
+  print(Back.RESET)
   if flags is None:
     return -1
   return TestFileChecker(flags)
