@@ -1,9 +1,12 @@
 from includes.Directory import Directory
 
 def setSpace(space):
-  print("|", end="")
-  for i in range(space):
-    print('---', end="")
+  if space > 0:
+    print('|  ', end="")
+  for i in range(space - 1):
+    print("   ", end="")
+  if space > 0:
+    print('-->', end="")
 
 def printFiles(files : list, space : int):
   for element in files:
@@ -21,3 +24,5 @@ def printDir(dir : Directory, range : int):
     print("Directories:")
     for directory in dir.directories:
       printDir(directory, range + 1)
+  if range > 1:
+    print("|")
