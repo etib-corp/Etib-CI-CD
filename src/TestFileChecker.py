@@ -21,7 +21,7 @@ def TestFileChecker(flags : dict):
     print(Back.RED + "STRUCTURE ERROR:" + Back.RESET + Fore.RED + " Test directory does not exist.")
     print(Fore.RESET)
     print(Back.RESET)
-    return -1
+    exit(84)
   src = getFiles(cwd, '/src')
   tests = getFiles(cwd, '/tests')
 

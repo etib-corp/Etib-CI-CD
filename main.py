@@ -38,7 +38,7 @@ def execute():
   print(Fore.RESET)
   print(Back.RESET)
   if flags is None:
-    return -1
+    exit(-1)
   return TestFileChecker(flags)
 
 execute()
