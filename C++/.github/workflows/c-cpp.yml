@@ -1,0 +1,37 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install dev deps
+      run: |
+         sudo apt-get -y update
+         sudo apt-get -y install g++ cmake build-essential libpthread-stubs0-dev libgl1-mesa-dev libx11-dev libxrandr-dev libfreetype6-dev libglew-dev libjpeg-dev libsndfile1-dev libopenal-dev
+    # UNCOMMENT THIS ONLY WHEN OPENGL WILL BE HANDLED
+    #
+    # - name: Install OpenGL deps
+    #   run: |
+    #     sudo apt-get install libglfw3-dev libglm-dev
+    - name: Install SFML deps
+      run: |
+        sudo apt-get -y install libsfml-dev
+    - name: Install SDL2 deps
+      run: |
+        sudo apt-get -y install libsdl2-2.0-0 libsdl2-gfx-1.0-0 libsdl2-image-2.0-0 libsdl2-mixer-2.0-0 libsdl2-net-2.0-0 libsdl2-ttf-2.0-0
+    - name: Install NCurses deps
+      run: |
+        sudo apt-get -y install libncurses5-dev libncursesw5-dev
+    - name: Build
+      run: |
+        ./build.sh
+        cd build/
+        cmake ..
