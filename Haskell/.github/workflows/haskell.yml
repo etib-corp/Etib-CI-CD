@@ -1,0 +1,37 @@
+name: HASKELL CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install dev deps
+      run: |
+          sudo apt-get update
+          sudo apt-get -y install g++ gcc libc6-dev libffi-dev libgmp-dev make xz-utils zlib1g-dev git gnupg netbase
+    - name: Install stack
+      run: |
+          curl -sSL https://get.haskellstack.org/ | sh
+    - name: Install ghci
+      run: |
+          sudo apt-get -y install ghc ghc-prof ghc-doc
+    - name: Build
+      run: |
+        make
+
+  coding-style:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Check coding style
+      run: |
+        ./ressources/lambdananas ./
+        ./ressources/coding-style.sh
